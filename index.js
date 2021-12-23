@@ -22,8 +22,8 @@ app.get('/dogs', async (req, res) => {
 })
 
 app.get('/dogs/:id', async (req, res) => {
-  const id = parseInt(request.params.id)
-  
+  const id = parseInt(req.params.id)
+
   try {
       const singleDogInfo = await pool.query('SELECT * FROM dogs WHERE id = $1', [id])
       console.log(res.json(singleDogInfo.rows))
