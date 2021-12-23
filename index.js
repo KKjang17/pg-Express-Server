@@ -21,6 +21,15 @@ app.get('/dogs', async (req, res) => {
   }
 })
 
+app.get('/dogs/:id', async (req, res) => {
+  try {
+      const singleDogInfo = await pool.query('SELECT * FROM dogs WHERE id = $1, ')
+      console.log(res.json(singleDogInfo.rows))
+  } catch (err) {
+    console.error(err.message)
+  }
+})
+
 //Cats
 app.get('/cats', async (req, res) => {
   try {
@@ -31,6 +40,8 @@ app.get('/cats', async (req, res) => {
       console.error(err.message)
   }
 })
+
+
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
