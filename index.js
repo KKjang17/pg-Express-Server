@@ -23,7 +23,7 @@ app.get('/dogs', async (req, res) => {
 
 app.get('/dogs/:id', async (req, res) => {
   try {
-      const singleDogInfo = await pool.query('SELECT * FROM dogs WHERE id = $1, ')
+      const singleDogInfo = await pool.query('SELECT * FROM dogs WHERE id = $1', [id])
       console.log(res.json(singleDogInfo.rows))
   } catch (err) {
     console.error(err.message)
