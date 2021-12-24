@@ -21,6 +21,7 @@ app.get('/dogs', async (req, res) => {
   }
 })
 
+//Dogs single route
 app.get('/dogs/:id', async (req, res) => {
   const id = parseInt(req.params.id)
 
@@ -43,7 +44,17 @@ app.get('/cats', async (req, res) => {
   }
 })
 
+//Cats single route
+app.get('/cats/:id', async (req, res) => {
+  const id = parseInt(req.params.id)
 
+  try {
+      const singleCatInfo = await pool.query('SELECT * FROM cats WHERE id = $1', [id])
+      console.log(res.json(singleCatInfo.rows))
+  } catch (err) {
+    console.error(err.message)
+  }
+})
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
